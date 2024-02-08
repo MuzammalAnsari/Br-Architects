@@ -1,0 +1,94 @@
+1 - Run npm init ---> to initialize the package.json file
+
+2 - npm install -g nodemon ---> nodemon is a utility that monitors for changes in files in a Node.js
+                                application and automatically restarts the server when changes are detected.
+
+3 - npm install cors dotenv express mongoose --save-dev nodemon ---> Basic dependencies to create a server
+
+4 - Importing libraries in index.js file
+
+	const express = require("express");	---> Node.js web application framework used for building web applications and APIs.
+	const mongoose = require("mongoose");	---> Provides an elegant and simpler way to work with MongoDB
+	const cors = require("cors"); ---> Enable or disable cross-origin requests, allowing or restricting access to resources on a web server from different domains.
+	const app = express();	---> Creates an instance of the Express application, which is used to define routes, middleware, and handle HTTP requests.
+	require("dotenv").config();
+	app.use(cors()); ---> Adds CORS middleware to the Express application. It allows cross-origin requests from any domain by default. 
+                              This is a common configuration for development purposes but may need to be more restrictive in a production environment.
+5 - setup routes 
+
+	const gradeRoutes = require("./src/routes/GradeRoutes");
+	app.use(`/`, gradeRoutes);
+
+6 - connect to mongodb
+	
+	mongoose.connect(process.env.CONNECTION_STRING, {
+
+  		useNewUrlParser: true,	---> used for compatibility with older MongoDB driver versions
+
+  		useUnifiedTopology: true, ---> used to enable the new unified topology engine in MongoDB.
+
+			      Explanation ---> enabling the unified topology engine by setting useUnifiedTopology: true 
+					       in your Mongoose connection configuration ensures that your Node.js application
+                                               uses the most efficient and up-to-date connection management and communication methods
+					       when interacting with your MongoDB database. It's a recommended practice when working 
+					       with modern MongoDB versions and the Node.js driver.
+	});
+
+7- Checking connection is connected successfuly or not
+
+	const db = mongoose.connection;
+	db.on("error", console.error.bind(console, "connection error:"));
+	db.once("open", () => {
+  	console.log("Connected to MongoDB");
+
+	  // once connected, start the server
+	  app.listen(3000, () => {
+          	console.log("Server listening on port 3000");
+  	  });
+	});
+
+
+
+Two things necessary to understand are :
+
+1- Models
+	Will be like below code
+
+	const mongoose = require("mongoose");
+
+	// Define the schema
+	const gradeSchema = new mongoose.Schema({
+	  _id: String,
+	  recrd: String,
+	  vesslterms: String,
+	  feature_type: String,
+	  chart: String,
+	  latdec: Number,
+	  londec: Number,
+	  gp_quality: String,
+	  depth: Number,
+	  sounding_type: String,
+	  history: String,
+	  quasou: String,
+	  watlev: String,
+	  coordinates: [Number], // Assuming coordinates is an array of numbers
+	});
+
+	// Create the Grade model
+	const Grade = mongoose.model("shipwrecks", gradeSchema);
+
+	module.exports = Grade; // Export the model
+
+2- Routes
+	looks like below code
+
+	const express = require("express");
+	const router = express.Router();
+	const Grade = require("../models/Grade");
+
+	router.get("/api/grades", async (req, res) => {
+	  const grades = await Grade.find();
+	  res.json(grades);
+	});
+
+	module.exports = router;
