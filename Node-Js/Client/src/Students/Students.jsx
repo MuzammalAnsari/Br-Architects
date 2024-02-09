@@ -170,10 +170,10 @@ function Students() {
         <div className="text-center font-bold">Age</div>
         <div className="text-center font-bold">Courses</div>
         <div className="text-center font-bold">Address</div>
-        <div className="text-center font-bold">Actions</div>
+        <div className="text-center font-bold">Action</div>
       </div>
       {isLoading ? (
-        <h1 className="text-center">Loading...</h1>
+        <h1 className="text-center">Loading....</h1>
       ) : (
         studentsData.map((student, index) => (
           <div className="grid grid-cols-7 gap-4 mt-2" key={student._id}>
