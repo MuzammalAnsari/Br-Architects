@@ -168,9 +168,9 @@ function Students() {
         <div className="text-center font-bold">First Name</div>
         <div className="text-center font-bold">Last Name</div>
         <div className="text-center font-bold">Age</div>
-        <div className="text-center font-bold">Courses</div>
-        <div className="text-center font-bold">Address</div>
-        <div className="text-center font-bold">Action</div>
+        <div className="text-center font-bold">courses</div>
+        <div className="text-center font-bold">address</div>
+        <div className="text-center font-bold">action</div>
       </div>
       {isLoading ? (
         <h1 className="text-center">Loading....</h1>
