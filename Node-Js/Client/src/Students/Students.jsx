@@ -162,9 +162,9 @@ function Students() {
         </div>
 
       </div>
-      <h2 className="text-xl font-bold mb-4">student Data</h2>
+      <h2 className="text-xl font-bold mb-4">Student Data</h2>
       <div className="grid grid-cols-7 gap-4">
-        <div className="text-center font-bold">iD</div>
+        <div className="text-center font-bold">ID</div>
         <div className="text-center font-bold">First Name</div>
         <div className="text-center font-bold">Last Name</div>
         <div className="text-center font-bold">Age</div>
