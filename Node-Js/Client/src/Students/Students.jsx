@@ -91,7 +91,7 @@ function Students() {
   return (
     <div className="container mx-auto p-4">
       <div className="mt-4">
-        <h2 className="text-xl font-bold mb-2">student Information</h2>
+        <h2 className="text-xl font-bold mb-2">Sstudent Information</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="mb-2">
